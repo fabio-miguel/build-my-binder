@@ -1,0 +1,12 @@
+.card {
+  display: inline-block;
+  border: 1px solid #ddd;
+  padding: 5px;
+  background-color: #f9f9f9;
+}
+
+.card__image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
