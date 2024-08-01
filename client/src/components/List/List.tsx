@@ -13,7 +13,20 @@ const List: React.FC = () => {
       {list.length === 0 ? (
         <p>No cards available</p>
       ) : (
-        list.map((card) => <p key={card.id}>{card.name}</p>)
+        <div className="card-list">
+          {list.map((card) => (
+            <div key={card.id} className="card">
+              {card.imageUrls.map((imageUrlSmall: string, index: number) => (
+                <img
+                  key={index}
+                  src={imageUrlSmall}
+                  alt={`${card.name} ${index + 1}`}
+                />
+              ))}
+              <p>{card.name}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

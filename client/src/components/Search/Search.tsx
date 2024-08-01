@@ -1,17 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import { updateList, setLoading } from "../../redux/reducers/listSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
 
-interface ListItem {
-  name: string;
-}
-
-const Search = () => {
+const Search: React.FC = () => {
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
-  const list = useSelector((state: RootState) => state.list.list);
 
   const handleSearch = async () => {
     dispatch(setLoading(true));
@@ -19,7 +13,15 @@ const Search = () => {
       const response = await axios.get(
         `https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${query}`
       );
-      dispatch(updateList(response.data.data));
+      const data = response.data.data;
+
+      // Extract card data with image URLs
+      const transformedData = data.map((card: any) => ({
+        id: card.id,
+        name: card.name,
+        imageUrls: card.card_images.map((img: any) => img.image_url_small),
+      }));
+      dispatch(updateList(transformedData));
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -31,16 +33,11 @@ const Search = () => {
     <div>
       <input
         type="text"
-        placeholder="Card name"
+        placeholder="Search card name"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
-      <div>
-        {list.map((item: ListItem, index: number) => (
-          <div key={index}>{item.name}</div>
-        ))}
-      </div>
     </div>
   );
 };

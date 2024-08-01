@@ -8,10 +8,12 @@ import Search from "./Search";
 jest.mock("axios");
 
 test("renders search input and button", () => {
-  <Provider store={store}>
-    <Search />
-  </Provider>;
-  expect(screen.getByPlaceholderText(/type card name/i)).toBeInTheDocument();
+  render(
+    <Provider store={store}>
+      <Search />
+    </Provider>
+  );
+  expect(screen.getByPlaceholderText(/search card name/i)).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /search/i })).toBeInTheDocument();
 });
 
@@ -24,7 +26,7 @@ test("calls the API with the correct query when the search button is clicked", a
     </Provider>
   );
 
-  const inputElement = screen.getByPlaceholderText(/type card name/i);
+  const inputElement = screen.getByPlaceholderText(/search card name/i);
   const searchButton = screen.getByRole("button", { name: /search/i });
 
   fireEvent.change(inputElement, {
