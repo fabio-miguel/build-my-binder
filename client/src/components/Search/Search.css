@@ -1,0 +1,46 @@
+/* Block: search */
+.search {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Element: search__input */
+.search__input {
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+/* Element: search__button */
+.search__button {
+  padding: 8px;
+}
+
+/* Modifier: search--small */
+.search--small .search__input {
+  font-size: 12px;
+}
+
+/* Modifier: search--medium */
+.search--medium .search__input {
+  font-size: 16px;
+}
+
+/* Modifier: search--large */
+.search--large .search__input {
+  font-size: 20px;
+}
+
+/* Modifier: search--default */
+.search--default .search__button {
+  background-color: gray;
+}
+
+/* Modifier: search--primary */
+.search--primary .search__button {
+  background-color: blue;
+}
+
+/* Modifier: search--secondary */
+.search--secondary .search__button {
+  background-color: green;
+}

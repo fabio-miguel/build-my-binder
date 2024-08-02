@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { updateList, setLoading } from "../../redux/reducers/listSlice";
 import { useDispatch } from "react-redux";
+import "./Search.css";
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -30,14 +31,20 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="search">
       <input
         type="text"
+        className="search__input"
         placeholder="Search card name"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button
+        className="search__button search__button--large"
+        onClick={handleSearch}
+      >
+        Search
+      </button>
     </div>
   );
 };

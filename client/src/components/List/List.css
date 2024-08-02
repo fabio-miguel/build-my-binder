@@ -1,0 +1,45 @@
+/* Block: card-list */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Element: card */
+.card {
+  border: 1px solid #ddd;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Element: card img */
+.card__image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Modifier: card-list__empty */
+.card-list__empty {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+}
+
+/* Element: list__loading */
+.list__loading {
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  padding: 16px;
+}

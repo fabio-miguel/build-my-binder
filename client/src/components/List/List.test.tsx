@@ -15,6 +15,18 @@ test("renders List component", () => {
   expect(listElement).toBeInTheDocument();
 });
 
+test("displays no cards message when list is empty and isLoading is false", () => {
+  store.dispatch({ type: "list/setLoading", payload: false });
+  store.dispatch({ type: "list/updateList", payload: [] });
+
+  render(
+    <Provider store={store}>
+      <List />
+    </Provider>
+  );
+  expect(screen.getByText("No cards available")).toBeInTheDocument();
+});
+
 test("shows loading text when in a loading state", () => {
   store.dispatch({ type: "list/setLoading", payload: true });
   render(
@@ -46,21 +58,9 @@ test("displays cards with images when isLoading is false and list is not empty",
     </Provider>
   );
 
-  expect(screen.getByText("Card 1")).toBeInTheDocument();
+  expect(screen.getByAltText("Card 1 1")).toBeInTheDocument();
   expect(screen.getByAltText("Card 1 1")).toHaveAttribute(
     "src",
     "https://images.ygoprodeck.com/images/cards_small/89631139.jpg"
   );
-});
-
-test("displays no cards message when list is empty and isLoading is false", () => {
-  store.dispatch({ type: "list/setLoading", payload: false });
-  store.dispatch({ type: "list/updateList", payload: [] });
-
-  render(
-    <Provider store={store}>
-      <List />
-    </Provider>
-  );
-  expect(screen.getByText("No cards available")).toBeInTheDocument();
 });
