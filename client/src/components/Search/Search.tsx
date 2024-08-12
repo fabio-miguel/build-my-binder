@@ -1,6 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { updateList, setLoading } from "../../redux/reducers/listSlice";
+import {
+  setLoading,
+  updateList,
+  moreListCardsToLoad,
+  nextListPageToLoad,
+} from "../../redux/reducers/listSlice";
 import { useDispatch } from "react-redux";
 import "./Search.css";
 
@@ -15,14 +20,16 @@ const Search: React.FC = () => {
         `https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${query}`
       );
       const data = response.data.data;
-
-      // Extract card data with image URLs
-      const transformedData = data.map((card: any) => ({
+      const cardData = data.map((card: any) => ({
         id: card.id,
         name: card.name,
-        imageUrls: card.card_images.map((img: any) => img.image_url_small),
+        imageUrls: card.card_images.map((image: any) => ({
+          id: image.id,
+          imageUrl: image.image_url_small,
+        })),
       }));
-      dispatch(updateList(transformedData));
+
+      dispatch(updateList(cardData));
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {

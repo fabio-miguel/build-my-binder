@@ -1,24 +1,20 @@
+import { useSelector } from "react-redux";
 import Card from "../Card/Card";
 import "./Binder.css";
+import { RootState } from "../../redux/store";
 
-interface CardInfo {
-  name: string;
-  card_images: { image_url_small: string }[];
-}
-
-interface BinderProps {
-  cards: CardInfo[];
-}
-
-const Binder: React.FC<BinderProps> = ({ cards }) => {
+const Binder: React.FC = () => {
+  const selectedCards = useSelector(
+    (state: RootState) => state.list.selectedCards
+  );
   return (
     <div className="binder">
-      {cards.length === 0 ? (
+      {selectedCards.length === 0 ? (
         <p className="binder__empty">No cards selected</p>
       ) : (
         <div className="binder__grid">
-          {cards.map((card, index) => (
-            <div key={index} className="binder__card">
+          {selectedCards.map((card, index) => (
+            <div key={card.id} className="binder__card">
               <Card cardInfo={card} />
             </div>
           ))}

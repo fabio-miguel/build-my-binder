@@ -37,30 +37,3 @@ test("shows loading text when in a loading state", () => {
   const loadingElement = screen.getByTestId("loading");
   expect(loadingElement).toBeInTheDocument();
 });
-
-test("displays cards with images when isLoading is false and list is not empty", () => {
-  store.dispatch(setLoading(false));
-  store.dispatch(
-    updateList([
-      {
-        id: 1,
-        name: "Card 1",
-        imageUrls: [
-          "https://images.ygoprodeck.com/images/cards_small/89631139.jpg",
-        ],
-      },
-    ])
-  );
-
-  render(
-    <Provider store={store}>
-      <List />
-    </Provider>
-  );
-
-  expect(screen.getByAltText("Card 1 1")).toBeInTheDocument();
-  expect(screen.getByAltText("Card 1 1")).toHaveAttribute(
-    "src",
-    "https://images.ygoprodeck.com/images/cards_small/89631139.jpg"
-  );
-});

@@ -1,36 +1,49 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import "./List.css"; // Make sure to import the CSS file
+import { selectedCard } from "../../redux/reducers/listSlice";
+import Card from "../Card/Card";
+import "./List.css";
 
 const List: React.FC = () => {
-  const { isLoading, list } = useSelector((state: RootState) => state.list);
+  const dispatch = useDispatch();
+  const { isLoading, list, moreListCardsToLoad, nextListPageToLoad } =
+    useSelector((state: RootState) => state.list);
 
-  if (isLoading) {
-    return (
-      <p className="list__loading" data-testid="loading">
-        Loading...
-      </p>
-    );
-  }
+  const cardImages = list.flatMap((card) =>
+    card.imageUrls.map((image) => ({
+      id: image.id,
+      name: card.name,
+      imageUrl: image.imageUrl,
+    }))
+  );
+
+  const handleCardClick = (card: {
+    id: number;
+    name: string;
+    imageUrl: string;
+  }) => {
+    dispatch(selectedCard(card));
+  };
 
   return (
     <div className="card-list" data-testid="list">
-      {list.length === 0 ? (
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : cardImages.length === 0 ? (
         <p className="card-list__empty">No cards available</p>
       ) : (
-        list.map((card) => (
-          <div key={card.id} className="card">
-            {card.imageUrls.map((imageUrlSmall: string, index: number) => (
-              <img
-                key={index}
-                className="card__image"
-                src={imageUrlSmall}
-                alt={`${card.name} ${index + 1}`}
-              />
-            ))}
-          </div>
+        cardImages.map((image) => (
+          <Card
+            cardInfo={{
+              id: image.id,
+              name: image.name,
+              imageUrl: image.imageUrl,
+            }}
+            onClick={() => handleCardClick(image)}
+          />
         ))
       )}
+      {/* render more cards or a "Load More" button here */}
     </div>
   );
 };

@@ -1,0 +1,134 @@
+A search of Blue-Eyes would return the `apiExample.json`. 
+From there, you can see that the card has multiple image URL variants.
+
+In the `Search.tsx` component, we dispatch the relevant card data we want. 
+
+```
+const cardData = data.map((card: any) => ({
+        id: card.id,
+        name: card.name,
+        imageUrls: card.card_images.map((image: any) => ({
+          id: image.id,
+          imageUrl: image.image_url_small,
+        })),
+      }));
+
+      dispatch(updateList(cardData));
+```
+
+In an ideal world, each there would only be one card with one image. 
+However, as you can see from the `apiExample.json`, Blue-Eyes has various card image variations.
+Therefore, we must treat each image as its own card and thus render each image as its own card. 
+Below is state of list in redux once the above dispatch is complete, which shows the multiple images. 
+
+```
+[
+    {
+        "id": 89631139,
+        "name": "Blue-Eyes White Dragon",
+        "imageUrls": [
+            {
+                "id": 89631139,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631139.jpg"
+            },
+            {
+                "id": 89631140,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631140.jpg"
+            },
+            {
+                "id": 89631141,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631141.jpg"
+            },
+            {
+                "id": 89631142,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631142.jpg"
+            },
+            {
+                "id": 89631143,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631143.jpg"
+            },
+            {
+                "id": 89631144,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631144.jpg"
+            },
+            {
+                "id": 89631145,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631145.jpg"
+            },
+            {
+                "id": 89631146,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631146.jpg"
+            }
+        ]
+    }
+]
+```
+
+In the `List.tsx` component I use a flatMap and map to result in an array with multiple entries.
+
+```
+const cardImages = list.flatMap((card) =>
+    card.imageUrls.map((image) => ({
+      id: image.id,
+      name: card.name,
+      imageUrl: image.imageUrl,
+    }))
+  );
+```
+
+Thus, each image is now treated as its own card
+  
+```
+[
+            {
+                "id": 89631139,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631139.jpg"
+            },
+            {
+                "id": 89631140,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631140.jpg"
+            },
+            {
+                "id": 89631141,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631141.jpg"
+            },
+            {
+                "id": 89631142,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631142.jpg"
+            },
+            {
+                "id": 89631143,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631143.jpg"
+            },
+            {
+                "id": 89631144,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631144.jpg"
+            },
+            {
+                "id": 89631145,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631145.jpg"
+            },
+            {
+                "id": 89631146,
+                "imageUrl": "https://images.ygoprodeck.com/images/cards_small/89631146.jpg"
+            }
+]
+    
+```
+
+Now, I can extract the necessary card data to create individual cards. 
+
+```
+{cardImages.map((image) => (
+          <div key={image.id} className="card">
+            <img
+              className="card__image"
+              src={image.imageUrl}
+              alt={image.name}
+            />
+          </div>
+        ))
+)}
+```
+
+Refer to `List.stories.tsx` to view the dispactched data from `Search.tsx` be rendered in the `List.tsx` component.

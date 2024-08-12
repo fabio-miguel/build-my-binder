@@ -3,8 +3,9 @@ import "@testing-library/jest-dom/extend-expect";
 import Card from "./Card";
 
 const cardInfo = {
+  id: 123,
   name: "Blue-Eyes White Dragon",
-  card_images: [{ image_url_small: "link_to_small_image" }],
+  imageUrl: "https://examplecard.com",
 };
 
 test("renders card image correctly", () => {

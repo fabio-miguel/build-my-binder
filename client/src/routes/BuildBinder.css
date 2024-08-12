@@ -1,0 +1,18 @@
+/* Block: build-binder */
+.build-binder {
+  display: flex;
+  height: 100vh; /* Full height of the viewport */
+}
+
+/* Element: build-binder__left */
+.build-binder__left {
+  width: 400px; /* Adjust width as needed */
+  padding: 16px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: for visual separation */
+}
+
+/* Element: build-binder__right */
+.build-binder__right {
+  flex: 1; /* Takes up the remaining space */
+  padding: 16px;
+}
