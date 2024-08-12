@@ -12,7 +12,7 @@ BuildMyBinder is a virtual binder application where users can create their binde
 - Print Binder
 - Draggable Cards
 - Page Transitions
-- Pernalised Binder Theme Colors
+- Mutliple Binder Theme Colors
 - Multiple Binder Grids (e.g. 3x3)
 - Notes Area
 
