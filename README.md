@@ -4,7 +4,7 @@ BuildMyBinder is a virtual binder application where users can create their binde
 
 ## Dev Preview
 
-![Build My Binder Preview](https://github.com/fabio-miguel/build-my-binder/raw/main/client/public/ecommerce-skate-reel.gif)
+![Build My Binder Preview](https://github.com/fabio-miguel/build-my-binder/raw/main/public/build-my-binder-reel.gif)
 
 ## Features in Devleopment
 
