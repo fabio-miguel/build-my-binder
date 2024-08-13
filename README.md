@@ -6,7 +6,7 @@ BuildMyBinder is a virtual binder application where users can create their binde
 
 ![Build My Binder Preview](https://github.com/fabio-miguel/build-my-binder/raw/main/public/build-my-binder-reel.gif)
 
-## Features in Devleopment
+## Features in Develeopment
 
 - User Authentication
 - Print Binder
