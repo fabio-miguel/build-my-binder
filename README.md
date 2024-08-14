@@ -1,6 +1,6 @@
 # BuildMyBinder
 
-BuildMyBinder is a virtual binder application where users can create their binders digitaly and store them for reference. The development stage can be viewed below, which demonstrates core functionality.
+BuildMyBinder is a virtual binder application where users can create their binders digitally and store them for reference. The development stage can be viewed below, which demonstrates core functionality.
 
 ## Dev Preview
 
